@@ -1,0 +1,123 @@
+[user]
+	name  = Guichard Manigat
+	email = gukardm@gmail.com
+[alias]
+	co     = checkout
+	ci     = commit
+	st     = status -s -b
+	d      = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	amend  = commit --amend
+	l      = log --pretty=format:'%Cred%h%Creset %s %C(yellow)%an%Creset' --abbrev-commit --max-count=15
+	ll     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative -30
+	rank   = shortlog -sn --no-merges
+	log    = log --stat
+	current = branch --show-current
+	curbr = branch --show-current
+	# Remove branches that have already been merged with master
+	# a.k.a. ‘delete merged’
+	delmerged = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d;"
+	delremote = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; git remote -v update -p;"
+	delm = delmerged
+	pushf = push --force
+	pushfwl = push --force-with-lease
+	wt = worktree
+	wtls = worktree list
+	wtmk = "!f() { local b=$1; git worktree add ../$b ; }; f"
+	wtrm = "!f() { local b=$1; git worktree remove ../$b ; git branch --merged | grep -v '\\*' | xargs -n1 git branch -d ; }; f"
+	wk = worktree
+	wkls = wtls
+	wkmk = wtmk
+	wkrm = wtrm
+	# Removes most recent merged branch
+	done = "!f() { git checkout main && git branch -D @{-1}; }; f"
+
+[color]
+	diff   = auto
+	status = auto
+	branch = auto
+	pager  = yes
+
+[tag]
+	sort = version:refname
+
+[column]
+	ui = auto
+
+[core]
+	editor       = nvim
+	whitespace   = space-before-tab, trailing-space
+
+[diff]
+	algorithm = histogram
+	renames = copy
+	colorMoved = true
+
+[branch]
+	autosetupmerge = always
+	sort = -committerdate
+
+[merge]
+	conflictstyle = zdiff3
+
+[pull]
+	rebase = true
+
+[commit]
+	verbose = true
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+
+[hub]
+	protocol   = https
+	http-clone = true
+
+[color "status"]
+	added     = yellow
+	changed   = green
+	untracked = blue bold
+
+[color "diff"]
+	meta = blue bold
+	frag = magenta bold
+	old  = red bold
+	new  = green
+
+[color "branch"]
+	current = yellow reverse
+	local   = yellow bold
+	remote  = green
+	plain   = red bold
+
+[help]
+	autocorrect = prompt
+
+[github]
+	user = gukardm
+
+[credential]
+	helper = cache
+
+[format]
+	signOff = true
+
+[init]
+	defaultBranch = main
+
+[includeIf "gitdir:~/src/debtbook/"]
+	path = .gitconfig-debtbook
+
+[maintenance]
+	repo = /Users/guichard.manigat/src/debtbook/infra-program
+	repo = /Users/guichard.manigat/src/debtbook/fifthasset-web
